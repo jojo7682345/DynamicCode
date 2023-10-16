@@ -6,7 +6,7 @@
 int main(){
 
 	// load in binary file
-	FILE* file = fopen("function.bin", "rb");
+	FILE* file = fopen("function.getOtherNumber.bin", "rb");
 	if(file==NULL){
 		printf("failed to open file");
 		return 1;
