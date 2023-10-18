@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-c -Wall -ggdb
 
-all: functions test.out
+all: test.out functions
 
 #compile the executable
 test.out: main.o
@@ -12,19 +12,14 @@ main.o: src/main.c
 	$(CC) $(CFLAGS) src/main.c
 
 # extract flat binary from function object file
-function.getOtherNumber.bin: function.o
-	objcopy -O binary -j .text.getOtherNumber function.o function.getOtherNumber.bin
+function.bin: function.o
+	$(CC) -o function.bin -Wl,-T src/function.ld function.o -nostdlib
 
-function.add.bin: function.o
-	objcopy -O binary -j .text.add function.o function.add.bin
-
-functions: function.add.bin function.getOtherNumber.bin
+functions: function.bin
 
 # compile the function
 function.o:
-	$(CC) $(CFLAGS) -ffunction-sections src/function.c
+	$(CC) $(CFLAGS) src/function.c -lc
 
 clean:
-	rm *.out
-	rm *.o
-	rm *.bin
+	rm *.out *.o *.bin

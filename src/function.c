@@ -1,10 +1,17 @@
+#define FUNCTION_IMPLEMENTATION
+#include "function.h"
+
+#include <stdio.h>
+
+int a = 4;
 
 int getNumber(){
-	return 4;
+	return a;
 }
 
 int getOtherNumber(){
-	return 5;
+
+	return 0;
 }
 
 int add(int a, int b){
